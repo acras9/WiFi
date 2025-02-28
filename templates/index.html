@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+    <title>WiFi Credentials</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="600">
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <h1>SEG Conference Room</h1>
+            <div class="header-buttons">
+                <button class="theme-toggle" id="themeToggle">🌓</button>
+                <button class="edit-button top-edit" id="editButton">✏️ Edit</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Password Modal -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <h2>Enter Admin Password</h2>
+            <input type="password" id="adminPassword" placeholder="Password">
+            <div>
+                <button onclick="checkPassword()">Submit</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="credentials">
+            <h1>WiFi Access</h1>
+            <div class="info">
+                <p><strong>Network Name:</strong> {{ ssid }}</p>
+                <p><strong>Password:</strong> {{ password }}</p>
+            </div>
+        </div>
+        <div class="qr-code">
+            <h2>Scan to Connect</h2>
+            <img src="{{ qr_code }}" alt="WiFi QR Code">
+        </div>
+    </div>
+    
+    <script>
+        // Theme toggling functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Password Modal Functions
+        const modal = document.getElementById('passwordModal');
+        const editButton = document.getElementById('editButton');
+
+        editButton.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === '0422') {  // Replace with your admin password
+                window.location.href = '/edit';
+            } else {
+                alert('Incorrect password');
+            }
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

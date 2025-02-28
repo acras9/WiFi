@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+    <title>Edit WiFi Credentials</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle">🌓</button>
+    <header class="site-header">
+        <h1>SEG Conference Room</h1>
+    </header>
+    <div class="container">
+        <div class="credentials">
+            <h1>Edit WiFi Settings</h1>
+            <form id="updateForm" class="edit-form">
+                <div class="form-group">
+                    <label>🔑 Admin Password:</label>
+                    <input type="password" id="admin_password" required placeholder="Enter admin password">
+                </div>
+                <div class="form-group">
+                    <label>📡 Network Name (SSID):</label>
+                    <input type="text" id="ssid" required placeholder="Enter SSID">
+                </div>
+                <div class="form-group">
+                    <label>🔒 WiFi Password:</label>
+                    <input type="text" id="password" required placeholder="Enter WiFi password">
+                </div>
+                <button type="submit">💾 Update Settings</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Theme toggling functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+    <script>
+        document.getElementById('updateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('admin_password', document.getElementById('admin_password').value);
+            formData.append('ssid', document.getElementById('ssid').value);
+            formData.append('password', document.getElementById('password').value);
+
+            try {
+                const response = await fetch('/update', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (response.ok) {
+                    window.location.href = '/';
+                } else {
+                    alert('Update failed. Please check your admin password.');
+                }
+            } catch (error) {
+                alert('Error updating credentials');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-accent: #ffffff;
+    --text-primary: #000000;  /* 라이트 모드에서는 검정색 */
+    --text-accent: #2196F3;
+    --border-color: #ddd;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-accent: #363636;
+    --text-primary: #ffffff;  /* 다크 모드에서는 흰색 */
+    --text-accent: #ffffff;
+    --border-color: #444444;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.credentials {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.qr-code {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    background-color: var(--bg-accent);
+    border-radius: 10px;
+}
+
+.qr-code img {
+    max-width: 300px;
+    border: 10px solid white;
+}
+
+.qr-code h2 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.info {
+    background: var(--bg-accent);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.info p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.info strong {
+    color: var(--text-accent);
+}
+
+.edit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--text-accent);
+    color: var(--bg-primary);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    transform: scale(1.05);
+    background: var(--text-accent);
+}
+
+.edit-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #363636;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444444;
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1em;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+button {
+    background: #2196F3;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #1976D2;
+}
+
+h1, h2, p {
+    color: var(--text-primary);
+}
+
+.site-header {
+    max-width: 1000px;  /* 컨테이너와 동일한 너비 */
+    margin: 0 auto 30px auto;
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 10px;  /* 컨테이너와 동일한 모서리 */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h1 {
+    margin: 0;
+    color: var(--text-accent);
+    font-size: 2em;
+    letter-spacing: 2px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 5px;
+}
+
+.theme-toggle {
+    position: static;
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-accent);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.edit-button.top-edit {
+    padding: 10px 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-buttons {
+    display: none;
+}
+
+.top-buttons {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px;  /* 버튼 사이 간격 증가 */
+    align-items: center;
+    background: var(--bg-secondary);  /* 배경색 추가 */
+    padding: 5px 15px;  /* 패딩 추가 */
+    border-radius: 25px;  /* 둥근 모서리 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);  /* 그림자 효과 */
+}
+
+/* Password Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.modal input {
+    margin: 10px 0;
+    padding: 8px;
+    width: 200px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 5px;
+}
+
+.modal button {
+    margin: 5px;
+    padding: 8px 16px;
+    background: var(--text-accent);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
